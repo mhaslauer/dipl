@@ -1,0 +1,236 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Master Thesis LaTeX Template
+% University of Applied Sciences Salzburg - ITS
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Written by Richard Leitner <me@g0hl1n.net>
+% Version 0.1
+% Last modification on Sun 02 Nov 2014
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is a free and unencumbered LaTeX template released into the public domain
+%
+% Anyone is free to copy, modify, publish, use, compile, sell, or
+% distribute this template, either in source code form or as a compiled
+% binary, for any purpose, commercial or non-commercial, and by any
+% means.
+%
+% In jurisdictions that recognize copyright laws, the author or authors
+% of this template dedicate any and all copyright interest in the
+% template to the public domain. We make this dedication for the benefit
+% of the public at large and to the detriment of our heirs and
+% successors. We intend this dedication to be an overt act of
+% relinquishment in perpetuity of all present and future rights to this
+% software under copyright law.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+% EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+% IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+% OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+% ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+% OTHER DEALINGS IN THE SOFTWARE.
+%
+% For more information, please refer to <http://unlicense.org/>
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO:
+%      + Abklären ab wann Nummerierung beginnt. (Laut Leitefaden auf der Seite nach der Titelseite, aber die Vorlage der Eidesstattlichen Erklärung hat keine Nummerierung)
+%      + Abklären ob Dokument twoside sein sollte
+%      + Abklären ob Seitennummer immer rechts sein soll, oder aussen bei twoside
+%      + Nochmal mit Anfordeungen vergleichen (=Ausdrucken & messen)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% INFO: remove "draft" in the final verison!
+\documentclass[a4paper,12pt,titlepage,onecolumn,twoside]{report}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+\usepackage[ngerman]{babel} 	% German!
+\usepackage[T1]{fontenc} 	% for underscore usage (Added by Haslauer)
+\usepackage[utf8]{inputenc}	% UTF8, Baby!
+\usepackage{listings}		% code listings
+\usepackage{color}			% text- & background color
+\usepackage{hyperref}		% hyperlink customisations
+\usepackage{fancyhdr}		% header & footer customisations
+\usepackage{lastpage}		% page number variables
+\usepackage{datetime}		% date & time functions
+\usepackage{graphicx}		% graphics and images
+\usepackage{multirow}		% multirow & -column for tables
+\usepackage{appendix}		% enable appendices
+\usepackage{array}			% for m{} in tabular
+\usepackage[table]{xcolor}	% colorful tables :-)
+\usepackage{etoolbox}		% for colorful head/foot rules
+\usepackage{makeidx}			% for indexing
+\usepackage{shorttoc}		% short content overview
+\usepackage[parfill]{parskip}	% let paragraphs don't intend, but skip some space
+\usepackage[paper=a4paper,twoside=true,
+	inner=30mm,		% inner/left margin
+	outer=25mm,		% outer/right margin
+	top=25mm,		% top margin (header in margin)
+	headheight=10mm,% height of header
+	bottom=25mm,	% bottom margin (footer in margin)
+]{geometry}
+\usepackage[onehalfspacing]{setspace} % Line-spacing 1.5
+\usepackage{layouts}
+\usepackage[printonlyused]{acronym}
+\usepackage{babelbib}
+\bibliographystyle{babplain}
+\usepackage{subcaption}
+
+%\usepackage[printonlyused]{acronym}	% Abkürzungsverzeichnis
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metadata
+\def \theauthor {Michael Haslauer} % Name des Autors
+\def \titlepageAuthor {Michael Haslauer, BSc}
+\def \authorBirthDate {22. Feb. 1991} % Geburtsdatum des Autors
+\def \authorBirthCity {Salzburg} % Geburtsort des Autors
+\def \matrikelnummer {1310581019}
+\def \betreuer{DI Christian Neureiter} % Name des Betreuers
+\def \thetitle {DevOps und Continuous Delivery} % Haupt-Titel
+\def \subtitle {Evaluierung der Umsetzung von DevOps in kleinen Unternehmen mit geringer Personenanzahl} % Untertitel
+\def \covercity {Puch-Urstein} % Ort für Titelseite und Eidesstattliche
+\def \coverdate {Januar 2015} % Datum für Titelseite
+\def \signaturedate {21. Juni 2015} % Unterschriftsdatum für Eidesstattliche
+\def \signaturecity {Salzburg} % Ort der Signatur für die Eidesstattliche
+\hypersetup{
+	pdftitle={\thetitle},		% title
+	pdfauthor={\theauthor},		% author
+	pdfsubject={Master Thesis},	% subject of the document
+	pdfcreator={\LaTeX},		% creator of the document
+	pdfproducer={\LaTeX},		% producer of the document
+	pdfkeywords={keyword1} {keyword2},	% list of keywords
+	pdfnewwindow=true,			% links in new window
+	colorlinks=false,			% false: boxed links; true: colored links
+	pdfborder={0 0 0},			% hide boxes around links
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header & Footer
+\fancypagestyle{fhs-ma-thesis}{%
+\fancyhf{}% Clear header/footer
+\fancyhead{}%
+%\renewcommand{\headheight}{30pt}%
+\fancyhead[LO,RE]{\rightmark} % Leftmark: Chapter; Rightmark: Section
+\fancyhead[C]{}%
+\fancyhead[RO,LE]{\thepage}%
+\renewcommand{\headrulewidth}{1pt}%
+\fancyfoot{}% Empty Footer
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pagestyle for Table of Contents
+\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fhs-ma-thesis}}} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pagestyle for Chapter Opening
+\makeatletter
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+	\thispagestyle{fhs-ma-thesis}% original style: plain
+	\global\@topnum\z@
+	\@afterindentfalse
+	\secdef\@chapter\@schapter}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Own Hypenations
+\hyphenation{Au-to-ri-sie-rung}
+\hyphenation{Pipe-line}
+\hyphenation{Dev-Ops}
+\hyphenation{Log-Nach-rich-ten}
+\hyphenation{OpenSSH}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Listing Style
+\lstdefinestyle{code}{
+	breaklines=true,
+	frame=single,
+	captionpos=b,
+	basicstyle=\footnotesize\ttfamily,  % fontstyle (remove \footnotesize for normal size)
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Rename Listings in Tableof
+\renewcommand\lstlistingname{Auflistung}
+\renewcommand\lstlistlistingname{Auflistungsverzeichnis}
+
+%\addto\captionsngerman{% Replace "english" with the language you use
+%  \renewcommand{\contentsname}%
+%    {Gliederungsübersicht}%
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Titelseite
+\pagestyle{empty}
+\input{Titlepage}
+
+% Leere Seite: "Rückseite der Titelseite"
+\newpage\null\thispagestyle{empty}\newpage
+
+\setcounter{page}{1} % Page after Titlepage is #1
+\pagestyle{fhs-ma-thesis} % use the our pagestyle after the titlepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Eidesstattliche Erklärung
+\include{Eidesstattliche-Erklaerung}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract
+\input{Abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Inhaltsverzeichnis
+\tableofcontents
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% the "real" content
+\include{Einleitung}
+
+\include{Theorie}
+
+\include{Methodik}
+
+\include{Implementierung}
+
+\include{Ergebnisse}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abkürzungsverzeichnis
+%\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+%\section*{Abkürzungsverzeichnis}
+%\begin{acronym}
+%\acro{LXC}{Linux Container Technologie}
+%\end{acronym}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% lists, references & index
+\addcontentsline{toc}{chapter}{Verzeichnisse}
+\addcontentsline{toc}{section}{Tabellenverzeichnis}
+\listoftables
+
+\newpage
+\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+\listoffigures
+
+\newpage
+\addcontentsline{toc}{section}{Auflistungsverzeichnis} 
+\lstlistoflistings
+
+\newpage
+\addcontentsline{toc}{section}{Referenzen} 
+\bibliography{bibliography}
+
+%\newpage
+%\addcontentsline{toc}{section}{Index} 
+%\printindex
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

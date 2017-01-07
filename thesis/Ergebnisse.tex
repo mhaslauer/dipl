@@ -1,0 +1,196 @@
+\chapter{Ergebnisse der Fallstudie}
+Zum Abschluss der Arbeit wird das Ergebnis der Fallstudie betrachtet. Dazu werden die Metriken (siehe Abschnitt \ref{sec:metriken}) aller Abschnitte zusammengerechnet und analysiert. In Abschnitt \ref{sec:diskussion} werden weitere Erkenntnisse aus der Implementationsphase aufgezeigt und diskutiert. Insbesonders wird dabei auf die Forschungsfragen aus Abschnitt \ref{sec:forschungsfragen} eingegangen und diese beantwortet. Die gewonnenen Erkenntnisse geben einen Einblick in die Umsetzung der Konzepte von DevOps. Zuletzt wird im abschließenden Fazit das Ergebnis kurz zusammengefasst.
+
+\section{Auswertung der Metriken}
+\label{sec:auswertungmetriken}
+Im Folgenden werden die erfassten Werte der Metriken \textbf{Initialer Aufwand}, \textbf{Durchlaufzeit} und \textbf{Charakteristiken für den Aufwand} analysiert und erläutert.
+
+\paragraph{Initialer Aufwand:}
+Zur Auswertung dieser Metrik wird zuerst ein Vergleichswert aufgestellt, der die maximal mögliche Arbeitszeit des Projektteams in Personenstunden (PS) repräsentiert. Betrachtet man den Zeitraum in der diese Arbeit durchgeführt wurde, (01.01.2015 bis 30.06.2015) so ergeben sich in etwa 100 Arbeitstage\footnote{Abzüglich aller Feiertage, Wochenenden, Krankenstände und Urlaube} pro Person. Bei drei Personen im Projektteam und jeweils acht Arbeitsstunden pro Tag, ergibt sich eine gesamte maximale Arbeitszeit von 2400 Personenstunden.
+
+Wie in Abschnitt \ref{sec:zusammenfassung:basisinfrastruktur} kalkuliert, benötigt der Aufbau der Basisinfrastruktur 628 Personenstunden. Die Entwicklung aller Konzepte und der Aufbau der Systeme erfordern weitere 210 Personenstunden. Die Umsetzung der Konzepte von DevOps für die ausgewählten Applikationen benötigt zusammen 668\footnote{Delivery Agent: 80 PS, OIDC: 300 PS, CPAS: 180 PS, APEX: 108 PS} Personenstunden. Der Aufwand für die Implementierung beträgt also insgesamt 1506 Personenstunden. Verglichen mit den maximal möglichen 2400 Stunden verbleiben 894 freie Personenstunden. Die 1506 Personenstunden inkludieren lediglich den Aufwand für die konkrete Umsetzung, nicht aber weitere Tätigkeiten, wie beispielsweise Besprechungen oder organisatorische Aufgaben. Die Fallstudie hat gezeigt, dass die Umsetzung mit einem drei Personen Team innerhalb des vorgegebenen Zeitraums möglich ist. Die gesamte Implementierung wurde Ende Mai 2015 abgeschlossen, das entspricht einer Dauer von fünf Monaten. Eine Umsetzung der Konzepte von DevOps kann demnach auch mit einer geringen Anzahl von Mitarbeitern durchgeführt werden.
+
+\paragraph{Durchlaufzeit:}
+Für zwei Applikationen (Delivery Agent und CPAS) kann ein Vergleich der Durchlaufzeiten aufgestellt werden, da diese bereits im DC1.0 betrieben wurden. Die \autoref{tab:ergebnisse:durchlaufzeit} listet die Metriken der Durchlaufzeit für vorher und nachher auf.
+
+\begin{table}[ht]
+%\setlength{\arrayrulewidth}{0.3mm}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.5}
+\centering
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0}
+\multicolumn{1}{|c|}{\textbf{Metrik}} & \multicolumn{3}{|c|}{\textbf{Delivery Agent}} & \multicolumn{3}{|c|}{\textbf{CPAS}}				\\ 
+\hline
+Durchlaufzeit & vorher & nachher & Gewinn & vorher & nachher & Gewinn \\
+\hline
+a.) eine Node		& 20 Min. & 7 Min. & 285\% &	25 Min. & 10 Min. & 250\%\\ 
+\hline
+b.) alle Nodes		& 40 Min. & 15 Min. & 266\% & 320 Min. & 15 Min. & 2133\%\\ 
+\hline						
+c.) zusätzliche Node	& 90 Min. & 10 Min. & 900\% & 180 Min. & 45 Min. & 400\%\\
+\hline
+\end{tabular}
+\caption[Vergleich der Durchlaufzeiten von vorher und nachher]{Vergleich der Durchlaufzeiten des Delivery Agent und CPAS von vorher zu nachher. Die Definitionen für a, b und c finden sich in Abschnitt \ref{sec:metriken}.}
+\label{tab:ergebnisse:durchlaufzeit}
+\end{table}
+
+Wie man erkennen kann, ergeben sich erhebliche Steigerungen in der Effizienz. Der ermittelte Zeitgewinn beträgt mindestens 250 Prozent. Das volle Potential zeigt sich bei der CPAS Applikation und der Metrik b (alle Nodes): Durch die hohe Anzahl an Nodes (13 Stück), die gleichzeitig aktualisiert werden können, ist der Zeitgewinn wesentlich größer, als beim Delivery Agent mit nur zwei Nodes. Das bedeutet, umso mehr Nodes einer Applikation existieren, desto größer ist der sich ergebende Zeitgewinn. Beim CPAS entspricht dies einer Steigerung von 2133 Prozent. Soll ein unterbrechungsfreier Service garantiert werden, so dürfen nicht alle Nodes gleichzeitig aktualisiert werden. In diesem Fall entspricht die benötigte Zeit näherungsweise dem doppelten Zeitaufwand der Metrik a (eine Node). Auch hierbei ergibt sich ein Zeitgewinn, verglichen mit der Situation vor der Umsetzung genannter Konzepte. 
+
+Untersuchte Durchlaufzeiten zeigen also, dass mit der Umsetzung von DevOps Konzepten eine enorme Zeitersparnis erreicht wird und daher die Effizienz erheblich steigt. 
+
+\paragraph{Charakteristiken für den Aufwand:}
+Die letzte Metrik aus Abschnitt \ref{sec:metriken} befasst sich mit Charakteristiken für die Abschätzung des nötigen Aufwands. Mögliche Kandidaten dafür sind unter anderem, die Komplexität einer Applikation anhand der Anzahl ihrer Komponenten und die Verteilungseigenschaften. Diese beiden Merkmale wurden für die Applikationen vorliegender Arbeit erfasst. Die \autoref{tab:ergebnisse:charakteristik} fasst diese Metriken zusammen und stellt sie gegenüber.
+
+\begin{table}[ht]
+%\setlength{\arrayrulewidth}{0.3mm}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.5}
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\rowcolor[HTML]{C0C0C0}
+\multicolumn{1}{|c|}{\textbf{Applikation}} & \textbf{Komponenten} & \textbf{Verteiltes System} & \textbf{Aufwand} \\ 
+\hline
+Consul Cluster		& 2 		& Ja 	& 80 PS \\ 
+\hline
+Loadbalancer			& 5 		& Ja 	& 230 PS \\ 
+\hline						
+Logstash				& 13 	& Ja		& 120 PS \\
+\hline
+Sensu				& 9		& Ja		& 150 PS \\
+\hline
+Delivery Agent		& 7		& Ja		& 80 PS	 \\
+\hline
+OIDC					& 10		& Ja		& 300 PS  \\
+\hline
+CPAS					& 10		& Nein	& 180 PS  \\
+\hline
+APEX					& 7		& Nein	& 100 PS	  \\
+\hline
+\end{tabular} 
+\caption[Zusammenfassung der Charakteristiken aller Applikationen]{Zusammenfassung der Charakteristiken aller Applikationen. Je höher die Zahl in Spalte Komponenten, desto höher ist die Komplexität einer Applikation.}
+\label{tab:ergebnisse:charakteristik}
+\end{table}
+
+Betrachtet man oben stehende \autoref{tab:ergebnisse:charakteristik} so fällt auf, dass die Anzahl der Komponenten keinen direkten Einfluss auf den Implementierungsaufwand hat. Die Komponentenanzahl lässt lediglich eine sehr grobe Abschätzung des nötigen Aufwandes zu. Ebenso scheinen die Verteilungseigenschaften einer Applikation keinen erheblichen Einfluss auf den benötigten Aufwand zu nehmen. In vorliegender Arbeit konnte demnach keine Charakteristik anhand der zwei ausgewählten Kandidaten ermittelt werden, die den Aufwand der Implementierung abschätzen lässt.
+
+\section{Diskussion der Ergebnisse}
+\label{sec:diskussion}
+Die Ergebnisse aus Abschnitt \ref{sec:auswertungmetriken} werden im Folgenden genauer erläutert. Dazu wird im speziellen auf die Forschungsfragen aus Abschnitt \ref{sec:forschungsfragen} eingegangen und diese diskutiert.
+
+\paragraph{•}
+\textbf{Bleibt der Aufwand der Implementierung annähernd gleich oder verändert sich dieser mit Anzahl der Applikationen?} / \textbf{Gibt es nutzbare Gemeinsamkeiten bei der Implementation?}
+
+Um diese Frage ausreichend beantworten zu können, war die Menge an untersuchten Applikationen zu klein. So kann aus einem Vergleich der Aufwände der vier Applikationen keine detaillierte Schlussfolgerung gezogen werden. Allerdings ist eine Tendenz erkennbar. Je mehr Komponenten bereits automatisiert wurden, desto weniger Aufwand erfordern weitere Applikationen, die dieselben Komponenten nutzen. Der notwendige Aufwand nimmt demnach potentiell mit Anzahl der Applikationen ab. Je homogener die Applikationslandschaft eines Unternehmens ist, desto weniger Aufwand wird demnach benötigt. Da in der Fallstudie aber sehr verschiedene Applikationen mit unterschiedlichen Komponenten betrachtet wurden, tritt dieser Effekt kaum auf. Ein paar Komponenten wie Supervisor, Java, Keepalived, HAProxy oder Tomcat wurden allerdings immer wieder benötigt. In \autoref{tab:ergebnisse:wiederverwendung} erkennt man, dass für diese wiederkehrenden Komponenten bereits bestehende Roles wiederverwendet wurden. Der Aufwand der Implementierung für die jeweilige Applikation konnte demnach in diesem Maß verringert werden.
+
+\begin{table}[ht]
+%\setlength{\arrayrulewidth}{0.3mm}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.5}
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\rowcolor[HTML]{C0C0C0}
+\multicolumn{1}{|c|}{\textbf{Applikation}} & \textbf{wiederverwendete Roles}\\ 
+\hline
+Consul Cluster		& 0 	\\ 
+\hline
+Loadbalancer			& 2 	\\ 
+\hline						
+Logstash				& 3 \\
+\hline
+Sensu				& 3 \\
+\hline
+Delivery Agent		& 6	\\
+\hline
+OIDC					& 4 \\
+\hline
+CPAS					& 5 \\
+\hline
+APEX					& 5 \\
+\hline
+\end{tabular} 
+\caption[Anzahl der wiederverwendeten Roles pro Applikation]{Anzahl der wiederverwendeten Roles pro Applikation. Je höher die Zahl, desto höher ist der Grad an Wiederverwendung und desto stärker sinkt der Implementationsaufwand.}
+\label{tab:ergebnisse:wiederverwendung}
+\end{table}
+
+Eine Voraussetzung, um diesen positiven Effekt zu erhalten ist, dass die Ansible Roles für die Komponenten entsprechend generisch ausgeführt sind. Jede Komponente muss in einer eigenen Role gekapselt sein. Diese darf nur eine Basisinstallation der Komponente, ohne spezielle Konfiguration für eine Applikation, vornehmen. Ansonsten ist eine Wiederverwendung der Role nicht möglich und der Implementationsaufwand wird jedes mal notwendig. 
+Erst in der Role für die von den anderen Komponenten abhängige Applikation, dürfen diese entsprechend konfiguriert werden. Der minimale Aufwand für die Automatisierung einer Applikation ist demnach die Erstellung einer Role für diese Applikation. Dies gilt unter der Voraussetzung, dass bereits alle anderen Komponenten automatisiert sind. Die richtige Strukturierung der Roles ist also entscheidend. 
+
+Zusammenfassend wurde festgestellt, dass es nutzbare Gemeinsamkeiten gibt, die den Arbeitsaufwand reduzieren. Dies sind vor allem mehrfach genutzte Komponenten. Für jede Applikation ist allerdings ein Mindestmaß an Aufwand notwendig. Dieser lässt sich auch mit hoher Anzahl an Applikationen nicht auf Null reduzieren.
+
+\paragraph{•}
+\textbf{Gibt es Charakteristiken anhand derer sich der Implementationsaufwand abschätzen lässt?}
+
+Wie bereits in Abschnitt \ref{sec:auswertungmetriken} erwähnt, konnten im Laufe vorliegender Arbeit keine Charakteristiken ermittelt werden, die den Aufwand annähernd abschätzen lässt. So benötigte der Loadbalancer mit nur fünf Komponenten wesentlich mehr Zeit als Sensu mit neun Komponenten. Ein Grund hierfür war, dass beim Loadbalancer zuerst ein Proof of Concept aufgebaut werden musste, der bei Sensu nicht nötig war. Auch die Applikationen CPAS und OIDC, mit gleicher Anzahl an Komponenten, weisen einen signifikanten Unterschied im benötigten Aufwand auf. Grund hierfür waren die Probleme bei der Automatisierung von OpenLDAP bei OIDC. Die Anzahl der Komponenten ist demnach kein ausreichend gutes Kriterium, um den benötigten Aufwand abschätzen zu können. Es hängt sehr davon ab, welche Komponenten benötigt werden und ob diese bereits Konzepte für eine Automatisierung unterstützen. Ist dies nicht der Fall, so steigt der Implementationsaufwand erheblich.
+
+Auch die Verteilungseigenschaften einer Applikation (\autoref{tab:ergebnisse:charakteristik}) haben keinen erkennbaren Einfluss auf den benötigten Aufwand. So wurde für den Delivery Agent, der Verteilungseigenschaften aufweist, weniger Zeit benötigt als für APEX ohne Verteilung. Bei OpenLDAP hingegen ergab die notwendige Verteilung einen wesentlich größeren Mehraufwand. Die Fallstudie lässt die Schlussfolgerung zu, dass kein Mehraufwand entsteht, wenn eine Applikation auf einen verteilten Einsatz ausgelegt ist. Werden diese Konzepte allerdings nicht ausreichend unterstützt, so ergeben sich wesentlich mehr Probleme und somit mehr Aufwand bei der Automatisierung.
+
+Der Aufwand der Implementierung für eine Applikation lässt sich demnach im Vorfeld nur schwer abschätzen. Für eine annähernd genaue Schätzung ist ein hohes Maß an Erfahrung notwendig. Anhand der beteiligten Komponenten lässt sich lediglich eine sehr grobe Schätzung erstellen.
+
+\paragraph{•} 
+\textbf{Welche Infrastruktur ist grundsätzlich nötig für den Betrieb mit DevOps?} / \textbf{Welche neuen Konzepte werden benötigt und wie können diese aussehen?}
+
+Betrachtet man die beiden Abschnitte \ref{sec:systemeundkonzepte} und \ref{sec:basisinfrastruktur} so waren für die Red Bull Media Base einige neue Konzepte und Infrastrukturen notwendig. Diese müssen aber nicht zwingend bei jedem Unternehmen nötig sein. Grundsätzlich werden Konzepte für die Automatisierung jener Tätigkeiten benötigt, die noch manuell durchgeführt werden. Im klassischen Betrieb betrifft dies oft die Konfiguration von Monitoring und Logging Systemen. Auch die Konfiguration des Loadbalancers ist meist eine manuelle Tätigkeit. Diese drei Bereiche sollten demnach in jedem Fall betrachtet werden. Möchte man die Konzepte von DevOps in vollem Umfang umsetzen, so müssen diese Systeme die Möglichkeit bieten, sich selbst automatisch zu konfigurieren. Dies erfolgt meist durch eine selbständige Anmeldung der jeweiligen neuen Maschine beim entsprechenden System. Die gewählten Systeme Sensu und Logstash verfolgen genau diesen Ansatz und gehören somit zur nächsten Generation von Monitoring/Logging Systemen. Das bisher weit verbreitete System Nagios unterstützt diese Konzepte derzeit nicht vollständig und ist daher nicht für den Betrieb mit DevOps geeignet.
+
+Weitere Aufgaben, wie die Erstellung der virtuellen Maschinen, dürfen in diesem Prozess nicht außer acht gelassen werden. Wichtig ist dabei, dass sich auch die Applikationen an diese neuen Konzepte anpassen müssen, da nur eine Änderung der Basisinfrastruktur nicht ausreichend ist.
+
+Eine Automatisierung der Applikationen kann grundsätzlich auch ohne Basisinfrastruktur durchgeführt werden. Allerdings sind so immer manuelle Tätigkeiten notwendig, um den kompletten Prozess eines Deployments abzuschließen. Man erhält also nicht alle Vorteile von DevOps.
+
+
+\paragraph{•}
+\textbf{Ist der Aufwand der Basisinfrastruktur einmalig oder pro Applikation erforderlich?}	
+
+Grundsätzlich ist der Aufwand nur einmalig notwendig. Allerdings ergeben sich wenige Aufgaben, die pro Applikation betrachtet werden müssen. Diese Aufgaben sind in \autoref{tab:ergebnisse:basisinfrastruktur} gelistet. So muss für jede neue Applikation zumindest der Build- und Deploymentplan konfiguriert, sowie eine Formation angelegt werden. Muss eine Applikation aus dem Internet erreichbar sein, so muss noch der Aufwand für Consul betrieben werden. Die Integration in den Loadbalancer ist somit ebenfalls abgeschlossen. Dies ergibt also etwa vier Personenstunden, die je Applikation an der Basisinfrastruktur anfallen. Dies ist verglichen mit den 838 Stunden, die für den Aufbau der Basisinfrastruktur nötig waren, vernachlässigbar.
+
+\begin{table}[ht]
+%\setlength{\arrayrulewidth}{0.3mm}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.5}
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\rowcolor[HTML]{C0C0C0}
+\multicolumn{1}{|c|}{\textbf{System/Aufgabe}} & \textbf{Aufwand je Applikation}\\ 
+\hline
+Konfiguration Build \& Deploymentplan 	& 1 PS	\\ 
+\hline
+Erstellung Formation						& 2 PS	\\ 
+\hline						
+Health Check für Consul					& 1 PS	\\
+\hline
+Integration in Loadbalancer				& 0 PS	\\
+\hline
+Integration in Logstash					& 0 PS	\\
+\hline
+Integration in Sensu						& 0 PS	\\
+\hline
+\end{tabular} 
+\caption[Arbeitsaufwand je Applikation für die Basisinfrastruktur]{Arbeitsaufwände je Applikation, die für eine Integration in die Basisinfrastruktur notwendig sind.}
+\label{tab:ergebnisse:basisinfrastruktur}
+\end{table}
+
+Für die Integration in Logstash und Sensu werden entsprechende Monitoring Checks und Log-Filter benötigt. Diese sind allerdings wiederverwendbar und können bei einem Großteil der Applikationen angewandt werden. Die Erstellung eines Basissets von Checks und Filter ist bereits in den Aufwand für den Aufbau von Sensu/Logstash mit eingerechnet. Für die meisten Applikationen fällt hiermit kein weiterer Aufwand mehr an. Es kann jedoch vorkommen, dass spezielle Applikationen weiteren Arbeitsaufwand erfordern. Dieser beträgt erfahrungsgemäß 1-3 Personenstunden.
+	
+	
+\paragraph{•}
+\textbf{Wie verändert sich die Effizienz nach der Umstellung?}
+
+Wie in \autoref{tab:ergebnisse:durchlaufzeit} dargestellt, wurde im Laufe der Fallstudie eine Steigerung der Effizienz von mindestens 200 Prozent beobachtet. Dies betrifft allerdings nur die Zeit für ein Deployment einer Applikation. Betrachtet man die Verfügbarkeit der Mitarbeiter, so ergibt sich eine wesentlich höhere Effizienzsteigerung. Bei einem manuellen Deployment sind die Mitarbeiter die gesamte Zeit mit dem Deployment beschäftigt und können somit keiner anderen Tätigkeit nachgehen. Beim automatisierten Deployment laufen alle nötigen Schritte ohne eingreifen von Personal ab. Es muss lediglich die Zeit zum Starten des Deployments betrachten werden, die erfahrungsgemäß bei weniger als einer Minute liegt. Währenddessen können andere Tätigkeiten durchgeführt werden. Betrachtet man also nicht nur die Durchlaufzeit des Deployments sondern auch die Verfügbarkeit von Mitarbeitern, so ergibt sich eine weitaus höhere Steigerung der Effizienz.
+
+
+\paragraph{•}
+\textbf{Weitere Erkenntnisse:} Im Laufe vorliegender Arbeit wurden noch weitere Erkenntnisse gesammelt, die im Folgenden aufgeführt sind:
+
+Es konnte beobachtet werden, dass vor allem ältere Applikationen, wie OpenLDAP mehr Probleme bei der Automatisierung verursachen als neuere Applikationen. Dies liegt daran, dass viele neue Applikationen bereits einige der Konzepte von DevOps unterstützen und somit eine Automatisierung vereinfachen. Ein Beispiel hierfür ist etwa Consul, bei dem, nach erfolgreicher Installation, nur in Ausnahmefällen manuelle Tätigkeiten notwendig sind. Grundsätzlich konnte beobachtet werden, dass neue Applikationen und Technologien weniger Aufwand benötigen und deshalb zu bevorzugen sind.
+
+Eine weitere Beobachtung die gemacht wurde ist, dass DevOps bei sehr kleinen Änderungen und wenigen Nodes langsamer ist, als die bisherige manuelle Tätigkeit. Muss beispielsweise eine Konfiguration auf nur einer einzigen Node angepasst werden, so ist die manuelle Durchführung schneller. Umso mehr Nodes betroffen sind, desto geringer wird allerdings der Zeitvorteil. Im Sinne von DevOps müsste die Änderung zuerst lokal getestet und dann in das Source Code Verwaltungssystem eingecheckt werden. Anschließend muss ein Deployment gestartet werden, um diese Änderung auf der Node auszurollen. Der Vorteil hierbei ist aber, dass die Änderung im Source Code Verwaltungssystem dokumentiert und somit nachvollziehbar ist.
+
+\section{Abschließendes Fazit}
+Die Einführung von DevOps und Continuous Delivery ist mittlerweile nicht nur großen Unternehmen wie Amazon oder Google vorbehalten. Immer mehr Unternehmen, vor allem auch kleine Unternehmen wie Start-Ups, verfolgen diese Konzepte. Dies zeigt im Besonderen die Untersuchung von \cite{dzone2015}. So sagen 68 Prozent der befragten Unternehmen, dass DevOps und Continuous Delivery bereits ein Standard ist bzw. bald werden wird. Es ist die Tendenz erkennbar, dass DevOps und Continuous Delivery für Software-Unternehmen notwendig wird, um wettbewerbsfähig zu bleiben.
+
+Die Umstellung auf die Konzepte von DevOps für die Red Bull Media Base war ein voller Erfolg. Die Umsetzung konnte unter den zeitlichen Vorgaben (Beginn 2015 bis Mitte 2015) und mit den geplanten Ressourcen (drei Personen) durchgeführt werden. Die Vorteile die dadurch erzielt wurden sind enorm und ermöglichen es, personelle Ressourcen auf wichtigere Tätigkeiten zu fokussieren. Dies betrifft insbesonders die Steigerung der Effizienz, die kurzen Durchlaufzeiten und die höhere Flexibilität. Trotzdem darf der Aufwand der Implementierung nicht unterschätzt werden. Die Umstellung betrifft viele Bereiche die mit einbezogen werden müssen. Das führt zu erheblichen Änderungen in den bisherigen Prozessen und der Infrastruktur eines Unternehmens. Darüber hinaus ist die gesamte Unternehmenskultur betroffen. Eine vollständige Umstellung auf DevOps kann deswegen nur erreicht werden, wenn die Konzepte von allen Beteiligten verstanden und umgesetzt werden. 
+
+Da eine komplette Umstellung allerdings mit viel Aufwand und auch mit Risiken verbunden ist, kann eine schrittweise Umstellung sinnvoll sein. Es ist für kleinere Unternehmen eventuell leichter, zuerst nur Teile der Build- und Deployment-Pipeline zu automatisieren. Dadurch können vorerst geringe Verbesserungen erzielt werden. In weiterer Folge kann dies ausgeweitet und ein Teil nach dem Anderen umgestellt werden, um vollständig die Konzepte von DevOps einzuführen.

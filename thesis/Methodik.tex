@@ -1,0 +1,102 @@
+\chapter{Methodik}
+\label{sec:methodik}
+Im folgenden Kapitel wird die, in vorliegender Arbeit angewandte, systematische Vorgehensweise von Goal-Question-Metric (GQM) beschrieben. Zuerst werden die einzelnen Punkte von GQM aufgezeigt. Anschließend wird die durchgeführte Fallstudie, sowie deren Rahmenbedingungen beschrieben. Am Ende des Abschnitts wird der Ist-Zustand aufgezeigt, um ein besseres Bild von der Ausgangslage darzustellen.
+
+\section{Goal-Question-Metric}
+\label{sec:goalquestionmetric}
+Als Erstes wird die gewünschte Zielsetzung der Arbeit beschrieben. Dann wird auf die Fragen, die für das Erreichen des Zieles beantwortet werden müssen, näher eingegangen. Sie stellen die Forschungsfragen der Arbeit dar. Der letzte Punkt behandelt die definierten Metriken, die eine quantitative Beantwortung der Fragen ermöglichen.
+
+\subsection{Problemstellung und Zielsetzung}
+\label{sec:ziel}
+Viele große Unternehmen, wie beispielsweise Google \cite{kim2014, meckfessel2014}, Facebook \cite{feitelson2013} oder Amazon \cite{lawton2013}, betreiben ihre Infrastruktur bereits erfolgreich nach den Konzepten von DevOps. Sie waren auch maßgeblich bei der Entwicklung dieses Trends beteiligt. Allerdings haben diese Unternehmen eine große Anzahl von Mitarbeitern um DevOps umzusetzen und erfolgreich einzusetzen. Je mehr verschiedene Projekte betrieben werden und je inhomogener die Infrastruktur ist, desto mehr Personen werden benötigt, um die automatisierten Prozesse zu warten. Außerdem sind grundlegende Änderungen an der vorherigen Handhabung der Software, sowie der Infrastruktur notwendig, um die Konzepte von DevOps erfolgreich umzusetzen. Dies ist für kleine Unternehmen eine große Herausforderung, da meist nicht so viele Mitarbeiter für diese Umstellung zur Verfügung stehen, der initiale Aufwand der Implementierung aber erheblich sein kann. 
+
+Das Ziel vorliegender Arbeit ist, eine neue Infrastruktur und Prozesse aufzubauen, die eine vollständige Automatisierung der Build und Deployment Pipeline (Abschnitt \ref{sec:pipeline}) ermöglichen und umsetzen. Die Infrastruktur und die darin enthaltenen Applikationen sollen vollständig nach den Konzepten von DevOps entwickelt und betrieben werden. Damit werden manuelle Tätigkeiten in diesen Prozessen minimiert oder eliminiert, und somit höhere Sicherheit gegenüber Fehlern gewährleistet und Ressourcen einspart. Bei gleichbleibender Effektivität soll daher die Effizienz des Betriebs der Software erheblich gesteigert werden. Somit können entweder Ressourcen eingespart oder auf andere Tätigkeiten verlagert werden. Für die komplette Umsetzung soll ein Team, bestehend aus drei Mitarbeitern, und ein Zeitraum von etwa einem halben Jahr ausreichen.
+
+
+\subsection{Forschungsfragen}
+\label{sec:forschungsfragen}
+Um das angestrebte Ziel zu erreichen, werden im Laufe der Arbeit folgende Fragen genauer betrachtet. Sie stellen gleichzeitig die Forschungsfragen der Arbeit dar.
+
+Die grundlegende Frage lautet, wie viel Aufwand die Implementierung der Konzepte von DevOps und Continuous Delivery grundsätzlich benötigt. Die Automatisierung der Build und Deployment Pipeline muss für jede Applikation separat durchgeführt werden. Daher wird ermittelt, ob dieser Aufwand pro Applikation gleich ist oder ob sich dieser mit steigender Anzahl der Applikationen reduziert/erhöht. Außerdem wird ermittelt, ob unterschiedliche Applikationen in etwa den gleichen Aufwand für die Automatisierung benötigen. Dafür werden nach Möglichkeit Charakterestiken herausgefunden, anhand derer sich der erwartete Implementationsaufwand grob abschätzen lässt.
+
+Um Applikationen professionell nach den Konzepten von DevOps zu betreiben, wird eine gewisse Basisinfrastruktur benötigt. Dazu zählen beispielsweise die benötigten Systeme oder entsprechende Konzepte. Die Basisinfrastruktur muss ebenfalls aufgebaut werden. Hier wird ermittelt, welche Infrastruktur grundsätzlich notwendig ist und entsprechende Konzepte erstellt um diese aufzubauen. Darüber hinaus wird aufgezeigt, wie viel Aufwand die Erstellung dieser Infrastruktur benötigt. Weiters wird erfasst, ob der Aufwand für den Aufbau der Basisinfrastruktur einmal initial notwendig ist, oder ob sich dieser mit steigender Anzahl an Applikationen erhöht.
+
+Anhand dieser beiden Fragestellungen soll primär geklärt werden, ob die Einführung der Konzepte von DevOps und die Umstellung der Applikationen von lediglich drei Mitarbeitern, innerhalb eines angemessen Zeitraums von etwa einem halben Jahr (Beginn 2015 bis Mitte 2015), bewältigt werden kann. 
+
+Da DevOps bei gleichbleibender Effektivität vor allem die Effizienz steigert, wird untersucht, wie sich diese nach erfolgter Umstellung für die Applikationen verändert. Dabei wird vor allem die Durchlaufzeit, von der fertigen Entwicklung bis zum Betreiben der Applikation im produktiven System, betrachtet. Sofern es sich um bereits im Einsatz befindliche Applikationen handelt, wird ein Vorher/Nacher-Vergleich aufgestellt.
+
+Zusammenfassung der Forschungsfragen:
+\begin{itemize}
+	\item Wie viel Implementationsaufwand ist für eine Umstellung anhand verschiedener Applikationen erforderlich?
+	\begin{itemize}
+		\item Bleibt der Aufwand der Implementierung annähernd gleich oder verändert sich dieser mit Anzahl der Applikationen?
+		\item Gibt es nutzbare Gemeinsamkeiten bei der Implementation?
+		\item Gibt es Charakteristiken, anhand derer sich der Aufwand abschätzen lässt?
+	\end{itemize}
+	\item Welche Infrastruktur ist grundsätzlich nötig für den Betrieb mit DevOps?
+	\begin{itemize}
+		\item Welche neuen Konzepte werden benötigt und wie können diese aussehen?
+		\item Wie viel Aufwand ist die Erstellung der Konzepte und der Infrastruktur?
+		\item Ist dieser Aufwand einmalig oder pro Applikation erforderlich?	
+	\end{itemize}
+	\item Wie verändert sich die Effizienz nach der Umstellung?
+\end{itemize}
+
+\subsection{Definition der Metriken}
+\label{sec:metriken}
+Um die Forschungsfragen zu quantifizieren, wurden folgende Metriken definiert: 
+
+\paragraph{Initialer Aufwand:} Für die Messung des initialen Implementationsaufwands wird erfasst, wie viele Personentage investiert werden, um die Build und Deployment Pipeline einer Applikation zu automatisieren. Dies wird getrennt für die Applikationen und für die Basisinfrastruktur betrachtet. Bei den Applikationen wird erfasst, wie viele Personentage die Umstellung benötigt und wie viele Teile der Automatisierung von anderen Applikationen wiederverwendet werden können. So wird verglichen, ob sich der initiale Aufwand pro weiterer Applikation verändert oder ob dieser konstant bleibt. 
+
+Bei der Basisinfrastuktur wird ebenfalls der Aufwand, der für den Aufbau benötigt wird, ermittelt. Der Aufwand wird für die Entwicklung der entsprechenden Konzepte und die Implementation der Automatisierung getrennt erfasst. Weiters wird ermittelt, wie viel Aufwand pro Applikation an der Basisinfrastruktur nötig ist, um diese entsprechend zu integrieren. Die Angabe des Aufwands erfolgt in Personenstunden (PS), mit 15 Minuten Intervallen als kleinste Einheit.
+
+\paragraph{Durchlaufzeit:} Die folgenden Metriken beschreiben die Durchlaufzeiten verschiedener Arten von Deployments von Applikationen, anhand derer, die erreichte Effizienz quantifizieren wird. Die Definitionen der Metriken orientieren sich an den Tätigkeiten, die das Operations-Team regelmäßig manuell durchführt. Es werden folgende drei Arten von Deployments definiert, deren Dauer separat gemessen wird:
+\begin{enumerate}
+	\item[a.)] Deployment einer neuen Version der Applikation auf einer bereits vorhandenen Maschine.
+	\item[b.)] Deployment einer neuen Version der Applikation auf allen bereits vorhandenen Maschinen.
+	\item[c.)] Deployment einer zusätzlichen Maschine mit der aktuellen Version der Applikation, inklusive aller notwendiger Third-Party-Software, sowie Integration der Maschine in die Basisinfrastruktur.
+\end{enumerate}
+Sofern eine Applikation bereits nach klassischen Konzepten betrieben wird, werden diese Metriken vor und nach der Umsetzung der Automatisierung erfasst. Aus diesen Durchlaufzeiten wird errechnet, um welchen Faktor sich die Effizienz steigert. Da die Durchlaufzeiten pro Deployment auf Grund vieler Faktoren variieren können, repräsentiert die angegebene Dauer den Durchschnitt von mindestens fünf Deployments, sofern darin keine erheblichen Ausreißer enthalten sind.
+
+\paragraph{Charakteristiken für den Aufwand:} Als potentielle Charakteristik zur Ermittlung des erforderlichen Implementationsaufwands könnte die Komplexität einer Applikation herangezogen werden. Um die Komplexität einer Applikation zu quantifizieren wird erfasst, aus wie vielen unterschiedlichen Komponenten eine Applikation besteht. Beispiele für Komponenten sind der Apache Tomcat oder die Java Runtime Umgebung, die für Java Web Applikationen benötigt werden. Die Anzahl der Komponenten wird dem benötigten Aufwand für die Implementierung gegenübergestellt.
+
+\section{Beschreibung der Fallstudie}
+\label{sec:fallstudie}
+Damit die Fragestellungen beantwortet und die definierten Metriken erfasst werden können, wird eine Fallstudie durchgeführt. Dabei wird untersucht, wie sich die Implementierung von DevOps mit einem Team aus drei Mitarbeitern durchführen lässt.
+
+\subsection{Rahmenbedingungen}
+\label{sec:rahmenbedingungen}
+Die Fallstudie wird komplett im Umfeld des Red Bull Media House durchgeführt. Die Abteilung Red Bull Media Base, in der der Autor tätig ist, ist zuständig für die Entwicklung der Multi-Media-Asset-Management Plattform des Red Bull Media House. Im Zuge der Arbeit wird die Umsetzung der Konzepte von DevOps und Continuous Delivery anhand der Applikationen der Red Bull Media Base betrachtet. Diese Projekte werden bereits nach agilen Vorgehensmodellen entwickelt, aber noch nach klassischen Vorgehensmodellen betrieben. Das Deployment und der Betrieb der Applikationen werden daher schrittweise, je Applikation separiert, umgestellt. Die gesamte bisherige Infrastruktur der Red Bull Media Base befindet sich in einem Rechenzentrum in Frankfurt. Zusätzlich gibt es noch kleinere Einheiten an einzelnen wichtigen Standorten wie London, Los Angeles, Sydney und Sao Paulo. Ein weiteres größeres Rechenzentrum ist in den USA geplant, das sich allerdings erst im Aufbau befindet. Diese Standorte müssen bei der Entwicklung von Konzepten berücksichtigt werden, da es global verteilte Applikationen im Portfolio der Red Bull Media Base gibt.
+
+Wie in Abschnitt \ref{sec:goalquestionmetric} erwähnt, ist DevOps bereits in großen Unternehmen im Einsatz. Kleinere Unternehmen mit weniger Mitarbeitern tragen hier aber ein großes Risiko bei der Umsetzung. Um die Umsetzung mit geringer Personenanzahl zu demonstrieren, wurden alle in dieser Arbeit erwähnten Tätigkeiten (außer Abschnitt \ref{sec:voraussetzungen}) von einem drei Personen Team durchgeführt. Die Durchführung startete zu Beginn des Jahres 2015 und endet mit ca. Ende Juni 2015. Bis dahin wird der Aufbau der Basisinfrastruktur und die Implementation für die Beispielapplikationen abgeschlossen sein.
+
+Für die Umsetzung der Konzepte von DevOps und Continuous Delivery sind grundlegende Änderungen an der Infrastruktur eines klassischen Betriebs notwendig. Diese Änderungen werden im Abschnitt \ref{sec:voraussetzungen} als Voraussetzung erläutert. Diese Arbeiten sind sehr speziell auf die Red Bull Media Base zugeschnitten und sind somit nicht allgemein repräsentativ. Ihre Umsetzung ist deshalb nicht Teil dieser Arbeit und wurde bis Ende 2014 bereits zum Großteil durchgeführt. Sie fließen nicht in die Berechnung des Gesamtaufwands mit ein, werden aber erwähnt um einen Überblick zu geben.
+
+\subsection{Vorgehensweise}
+\label{sec:vorgehensweise}
+Die Fallstudie ist in zwei Teilbereiche unterteilt und untersucht einerseits den Aufbau der Basisinfrastruktur und andererseits die Implementierung der DevOps Konzepte für Applikationen. Für die Basisinfrastruktur wird untersucht, welche Systeme und Konzepte minimal notwendig sind, um Applikationen im Umfeld der Red Bull Media Base (siehe Abschnitt \ref{sec:rahmenbedingungen}) nach DevOps betreiben zu können. Die in Abschnitt \ref{sec:basisinfrastruktur} genannten Applikationen beschreiben dabei die minimale Menge an Systemen die nötig sind, um für Applikationen der Red Bull Media Base die Umsetzung von DevOps zu ermöglichen. Mit Hilfe dieser Basisinfrastruktur kann ein verlässlicher Betrieb der Applikationen gewährleistet werden und sie unterstützt die vollständige Einführung der Automatisierung. Für jeden Bestandteil der Basisinfrastruktur wird untersucht, welche Probleme im klassischen Betrieb auftreten, wie diese Probleme mit neuen Konzepten gelöst werden können und wie der tatsächliche Aufbau aussieht. Abschließend wird eruiert, wie viel Aufwand der Aufbau der Basisinfrastruktur insgesamt benötigt.
+ 
+Der zweite Teilbereich der Fallstudie befasst sich mit der Implementierung der Konzepte von DevOps für beispielhafte Applikationen und ihre Integration in die Basisinfrastruktur. In der Fallstudie werden dabei vier unterschiedliche Applikationen betrachtet. Alle Applikationen werden von der Red Bull Media Base entwickelt. Sie unterscheiden sich aber in Komplexität, Reifegrad und Anzahl der beteiligten Entwickler. Bei der jüngsten Applikation (APEX, Abschnitt \ref{sec:apex}), wurde die Entwicklung gerade abgeschlossen. Sie ist noch nicht produktiv in Betrieb. Die älteste Applikation (CPAS, Abschnitt \ref{sec:cpas}), wird bereits seit knapp sieben Jahren eingesetzt. Die Größe des Entwicklungsteams der Applikationen reicht von einer Person, (Delivery Agent, Abschnitt \ref{sec:deliveryagent}) bis zu Teams mit ca. 10 Personen. Die Menge der Applikationen weist Verteilungseigenschaften mit einer Bandbreite von weltweit verteilt (CPAS, Abschnitt \ref{sec:cpas}) bis zu zentralen Clustern (OIDC, Abschnitt \ref{sec:oidc}) auf. Mit dieser Menge an Applikationen ist ein breites Spektrum abgedeckt und soll einen Überblick geben, wie die Implementierung für Applikationen mit unterschiedlichen Eigenschaften verläuft.
+
+Ein besonderer Schwerpunkt vorliegender Arbeit ist die Ermittlung, ob der initiale Aufwand der Implementierung für diese Applikationen in etwa gleich ist, oder ob dieser mit Anzahl der Applikationen ab bzw. zunimmt. Außerdem sollen Kriterien ermittelt werden anhand derer man den initialen Aufwand abschätzen kann. Dafür werden die Metriken je Applikation erfasst und anschließend gegenübergestellt.
+
+Damit die Entwicklung der Basisinfrastruktur begonnen werden konnte, mussten Vorarbeiten geleistet werden. Diese Vorarbeiten sind im Falle der Red Bull Media Base einerseits von einem größeren Team als nur drei Personen umgesetzt worden, andererseits wurden diese Arbeiten völlig separiert vom laufenden Betrieb durchgeführt. Aus diesem Grund werden diese Vorarbeiten nur kurz im Abschnitt \ref{sec:voraussetzungen} erläutert.
+
+\subsection{Ist-Zustand der Red Bull Media Base}
+\label{sec:istzustand}
+Die Red Bull Media Base entwickelt fast ausschließlich Applikationen für das Red Bull Media House, die fast alle Bereiche von der Kontribution bis zur Distribution von Multi-Media Dateien abdecken. Die Hauptapplikation ist eine zentrale Multi-Media-Asset-Management Applikation, in der viele Bereiche des Red Bull Media House abgebildet werden. Zusätzlich dazu gibt es ein globales Netzwerk von Standorten (siehe Abschnitt \ref{sec:rahmenbedingungen}), um den Austausch von Multi-Media Dateien zwischen den Außenstellen zu ermöglichen. Alle Applikationen die aktuell in Betrieb sind, werden von einem Hosting Provider aus Deutschland betreut. Dies bedeutet, dass die Installation und das Überwachen der Applikationen von diesem Provider übernommen wird. Alle Tätigkeiten die auf einzelnen Maschinen durchgeführt werden, müssen mit dem Hosting Provider abgestimmt werden, damit dieser einen einwandfreien Betrieb gewährleisten kann.
+
+Dies hat zur Folge, dass beim Deployment einer neuen Applikation, einer neuen Maschine oder einer neuen Version, neben den jeweiligen Entwicklern auch immer mindestens eine Person des Providers beschäftigt ist. Indem die Entwickler einiger Applikationen im Laufe der letzten Jahre die nötigen Rechte erhalten haben selbstständig Deployments durchzuführen, wurde dieser Prozess bereits etwas vereinfacht. Sind jedoch Tätigkeiten notwendig, die außerhalb dieses vordefinierten Bereiches liegen, ist wiederum eine Ressource des Providers notwendig um diese durchzuführen. Darüber hinaus wird ein Großteil der Tätigkeiten noch manuell durchgeführt und somit fehleranfällig ist und mehr Zeit in Anspruch nimmt. Ein weiteres Problem ist, dass das Know-How über den Betrieb der Applikationen fast ausschließlich beim Hosting Provider liegt und daher eine Abhängigkeit besteht.
+
+Das beschriebene Vorgehen ist allerdings nicht flexibel genug um auf individuelle Anforderungen reagieren zu können. Um diesen Anforderungen entsprechen zu können und Abhängigkeiten aufzulösen, wird im Zuge vorliegender Arbeit DevOps in der Red Bull Media Base eingeführt.
+
+\subsection{Das Projektteam}
+\label{sec:team}
+Wie in den Forschungsfragen definiert, besteht das Projektteam aus drei Personen, um die Umsetzung der Konzepte von DevOps und Continuous Delivery anhand eines kleinen Teams zu demonstrieren. Die Aufgabe des Projektteams ist es die komplette Umstellung voran zu treiben und zu implementieren. Um die Rahmenbedingungen besser darzustellen, werden im Folgenden die Mitglieder des Projektteams mit ihren bisherigen Erfahrungen beschrieben. Die jeweilige Personenbeschreibung wurde von jedem Mitglied selbst verfasst. Sie entstammen somit nicht dem Autor der restlichen Arbeit.
+
+\paragraph{Michael Haslauer (Autor):} Geboren 1991, studiert derzeit an der Fachhochschule Salzburg, Studiengang Informationstechnik und Systemmanagement und untersucht im Zuge seiner Masterarbeit die Konzepte von DevOps. Er arbeitet seit April 2011 für das Red Bull Media House und ist beteiligt an der Entwicklung der hauseigenen Multi-Media-Asset-Management Plattform. Seit Mai 2014 beschäftigt er sich mit DevOps und Continuous Delivery und ist beteiligt an der firmeninternen Initiative, die gesamte Plattform nach den Konzepten von DevOps zu betreiben. Bisher sind keine persönlichen Erfahrungen mit dem Betrieb von Software vorhanden.
+
+\paragraph{Alexander Dobriakov:} \textit{Alexander is a seasoned Software Delivery and Architecture Expert, who concepted, designed, implemented, and optimised Enterprise level software systems. With over 25 years experience in Information Technology for eCommerce, Analytical CRM, Logistics, Direct Marketing, Health Care, Media and Publishing industries, he has a wide range of hands-on expertise through the whole Software Lifecycle in Germany, Netherlands and Russia. Alexander is Oracle Certified Professional, iSAQB certified Software Architect, and hold a M.S. Degree in Mathematics and Aerospace engineering from South Ural State University.\footnote{Verfasst von Alexander Dobriakov}}
+
+\paragraph{Michael Kutzner:} \textit{In 1994, during his computer science studies at the University of Paderborn, he founded his first company paderLinx, a software development company and early adaptor in the internet business. In his role as CEO he lead the company during 7 years. 2001 Michael sold his company to mediaWays, a joint venture of Bertelsmann and Debis Systemhaus. 2002 mediaWays was acquired by the Spanish telecommunications company Telefónica. He was appointed Director Systems\&Applications being responsible of the hosting and service providing business line. Within three years he consolidated and developed Systems\&Applications to become a leading and profitable service provider in Germany, providing hosting and streaming services to top news magazines and TV stations.
+In 2004 he joined arvato mobile, a mobile unit of Bertelsmann where he took over the management of operations in the newly established GNAB business line. In 2006 he was appointed Vice President Operations of arvato mobile global being responsible for the operational departments, serving infrastructure and applications for the mobile and internet music and video services.\footnote{Verfasst von Michael Kutzner}}
